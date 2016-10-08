@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Customer.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CustomerStoreContainer">
+    <EntitySet Name="Customers" EntityType="Customer.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees" EntityType="Customer.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prospects" EntityType="Customer.Store.Prospects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Touches" EntityType="Customer.Store.Touches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contacts" EntityType="Customer.Store.Contacts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Addresses" EntityType="Customer.Store.Addresses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Credentials" EntityType="Customer.Store.Credentials" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ContactAddress" Association="Customer.Store.ContactAddress">
+      <End Role="Contact" EntitySet="Contacts" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerEmployee" Association="Customer.Store.CustomerEmployee">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerProspect" Association="Customer.Store.CustomerProspect">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Prospect" EntitySet="Prospects" />
+    </AssociationSet>
+    <AssociationSet Name="ProspectContact" Association="Customer.Store.ProspectContact">
+      <End Role="Prospect" EntitySet="Prospects" />
+      <End Role="Contact" EntitySet="Contacts" />
+    </AssociationSet>
+    <AssociationSet Name="ProspectTouch" Association="Customer.Store.ProspectTouch">
+      <End Role="Prospect" EntitySet="Prospects" />
+      <End Role="Touch" EntitySet="Touches" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeTouch" Association="Customer.Store.EmployeeTouch">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Touch" EntitySet="Touches" />
+    </AssociationSet>
+    <AssociationSet Name="ProspectAddress" Association="Customer.Store.ProspectAddress">
+      <End Role="Prospect" EntitySet="Prospects" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerAddress" Association="Customer.Store.CustomerAddress">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerCredentials" Association="Customer.Store.CustomerCredentials">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Credentials" EntitySet="Credentials" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeCredentials" Association="Customer.Store.EmployeeCredentials">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Credentials" EntitySet="Credentials" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Credentials_CredentialId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeDesignation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeTerritory" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Customer_CustomerId" Type="int" Nullable="false" />
+    <Property Name="Credentials_CredentialId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prospects">
+    <Key>
+      <PropertyRef Name="ProspectId" />
+    </Key>
+    <Property Name="ProspectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProspectName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProspectSource" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProspectDateAdded" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProspectAssignedTo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Customer_CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Touches">
+    <Key>
+      <PropertyRef Name="TouchId" />
+    </Key>
+    <Property Name="TouchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TouchDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TouchType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TouchNotes" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prospect_ProspectId" Type="int" Nullable="false" />
+    <Property Name="Employee_EmployeeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contacts">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContactFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactBusPhone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactExtension" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactCellPhone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactDecisionMaker" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactNotes" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prospect_ProspectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="AddrId" />
+    </Key>
+    <Property Name="AddrId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddrLine1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddrLine2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddrZip" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddrZip4" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact_ContactId" Type="int" Nullable="false" />
+    <Property Name="Prospect_ProspectId" Type="int" Nullable="false" />
+    <Property Name="Customer_CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Credentials">
+    <Key>
+      <PropertyRef Name="CredentialId" />
+    </Key>
+    <Property Name="CredentialId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccountPassword" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="ContactAddress">
+    <End Role="Contact" Type="Customer.Store.Contacts" Multiplicity="1" />
+    <End Role="Address" Type="Customer.Store.Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contact">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="Contact_ContactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerEmployee">
+    <End Role="Customer" Type="Customer.Store.Customers" Multiplicity="1" />
+    <End Role="Employee" Type="Customer.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Customer_CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerProspect">
+    <End Role="Customer" Type="Customer.Store.Customers" Multiplicity="1" />
+    <End Role="Prospect" Type="Customer.Store.Prospects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Prospect">
+        <PropertyRef Name="Customer_CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProspectContact">
+    <End Role="Prospect" Type="Customer.Store.Prospects" Multiplicity="1" />
+    <End Role="Contact" Type="Customer.Store.Contacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prospect">
+        <PropertyRef Name="ProspectId" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="Prospect_ProspectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProspectTouch">
+    <End Role="Prospect" Type="Customer.Store.Prospects" Multiplicity="1" />
+    <End Role="Touch" Type="Customer.Store.Touches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prospect">
+        <PropertyRef Name="ProspectId" />
+      </Principal>
+      <Dependent Role="Touch">
+        <PropertyRef Name="Prospect_ProspectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeTouch">
+    <End Role="Employee" Type="Customer.Store.Employees" Multiplicity="1" />
+    <End Role="Touch" Type="Customer.Store.Touches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Touch">
+        <PropertyRef Name="Employee_EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProspectAddress">
+    <End Role="Prospect" Type="Customer.Store.Prospects" Multiplicity="1" />
+    <End Role="Address" Type="Customer.Store.Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prospect">
+        <PropertyRef Name="ProspectId" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="Prospect_ProspectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerAddress">
+    <End Role="Customer" Type="Customer.Store.Customers" Multiplicity="1" />
+    <End Role="Address" Type="Customer.Store.Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="Customer_CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerCredentials">
+    <End Role="Customer" Type="Customer.Store.Customers" Multiplicity="*" />
+    <End Role="Credentials" Type="Customer.Store.Credentials" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Credentials">
+        <PropertyRef Name="CredentialId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Credentials_CredentialId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeCredentials">
+    <End Role="Employee" Type="Customer.Store.Employees" Multiplicity="*" />
+    <End Role="Credentials" Type="Customer.Store.Credentials" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Credentials">
+        <PropertyRef Name="CredentialId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Credentials_CredentialId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Customer" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="CustomerContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Customer.Customer" />
+          <EntitySet Name="Employees" EntityType="Customer.Employee" />
+          <EntitySet Name="Prospects" EntityType="Customer.Prospect" />
+          <EntitySet Name="Touches" EntityType="Customer.Touch" />
+          <EntitySet Name="Contacts" EntityType="Customer.Contact" />
+          <EntitySet Name="Addresses" EntityType="Customer.Address" />
+          <AssociationSet Name="ContactAddress" Association="Customer.ContactAddress">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerEmployee" Association="Customer.CustomerEmployee">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerProspect" Association="Customer.CustomerProspect">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Prospect" EntitySet="Prospects" />
+          </AssociationSet>
+          <AssociationSet Name="ProspectContact" Association="Customer.ProspectContact">
+            <End Role="Prospect" EntitySet="Prospects" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="ProspectTouch" Association="Customer.ProspectTouch">
+            <End Role="Prospect" EntitySet="Prospects" />
+            <End Role="Touch" EntitySet="Touches" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeTouch" Association="Customer.EmployeeTouch">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Touch" EntitySet="Touches" />
+          </AssociationSet>
+          <AssociationSet Name="ProspectAddress" Association="Customer.ProspectAddress">
+            <End Role="Prospect" EntitySet="Prospects" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerAddress" Association="Customer.CustomerAddress">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <EntitySet Name="Credentials" EntityType="Customer.Credentials" />
+          <AssociationSet Name="CustomerCredentials" Association="Customer.CustomerCredentials">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Credentials" EntitySet="Credentials" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeCredentials" Association="Customer.EmployeeCredentials">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Credentials" EntitySet="Credentials" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Customer.CustomerEmployee" FromRole="Customer" ToRole="Employee" />
+          <NavigationProperty Name="Prospects" Relationship="Customer.CustomerProspect" FromRole="Customer" ToRole="Prospect" />
+          <NavigationProperty Name="Addresses" Relationship="Customer.CustomerAddress" FromRole="Customer" ToRole="Address" />
+          <NavigationProperty Name="Credentials" Relationship="Customer.CustomerCredentials" FromRole="Customer" ToRole="Credentials" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="Customer.CustomerEmployee" FromRole="Employee" ToRole="Customer" />
+          <Property Name="EmployeeFirstName" Type="String" Nullable="false" />
+          <Property Name="EmployeeLastName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Touches" Relationship="Customer.EmployeeTouch" FromRole="Employee" ToRole="Touch" />
+          <Property Name="EmployeeDesignation" Type="String" Nullable="false" />
+          <Property Name="EmployeeTerritory" Type="String" Nullable="false" />
+          <NavigationProperty Name="Credentials" Relationship="Customer.EmployeeCredentials" FromRole="Employee" ToRole="Credentials" />
+        </EntityType>
+        <EntityType Name="Prospect">
+          <Key>
+            <PropertyRef Name="ProspectId" />
+          </Key>
+          <Property Name="ProspectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="Customer.CustomerProspect" FromRole="Prospect" ToRole="Customer" />
+          <NavigationProperty Name="Contacts" Relationship="Customer.ProspectContact" FromRole="Prospect" ToRole="Contact" />
+          <NavigationProperty Name="Touches" Relationship="Customer.ProspectTouch" FromRole="Prospect" ToRole="Touch" />
+          <Property Name="ProspectName" Type="String" Nullable="false" />
+          <Property Name="ProspectSource" Type="String" Nullable="false" />
+          <Property Name="ProspectDateAdded" Type="String" Nullable="false" />
+          <Property Name="ProspectAssignedTo" Type="String" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Customer.ProspectAddress" FromRole="Prospect" ToRole="Address" />
+          <Property Name="ProspectNumber" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Touch">
+          <Key>
+            <PropertyRef Name="TouchId" />
+          </Key>
+          <Property Name="TouchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TouchDate" Type="String" Nullable="false" />
+          <Property Name="TouchType" Type="String" Nullable="false" />
+          <Property Name="TouchNotes" Type="String" Nullable="false" />
+          <NavigationProperty Name="Prospect" Relationship="Customer.ProspectTouch" FromRole="Touch" ToRole="Prospect" />
+          <NavigationProperty Name="Employee" Relationship="Customer.EmployeeTouch" FromRole="Touch" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactFirstName" Type="String" Nullable="false" />
+          <Property Name="ContactLastName" Type="String" Nullable="false" />
+          <Property Name="ContactTitle" Type="String" Nullable="false" />
+          <Property Name="ContactBusPhone" Type="String" Nullable="false" />
+          <Property Name="ContactExtension" Type="String" Nullable="false" />
+          <Property Name="ContactCellPhone" Type="String" Nullable="false" />
+          <Property Name="ContactEmail" Type="String" Nullable="false" />
+          <Property Name="ContactDecisionMaker" Type="String" Nullable="false" />
+          <Property Name="ContactNotes" Type="String" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Customer.ContactAddress" FromRole="Contact" ToRole="Address" />
+          <NavigationProperty Name="Prospect" Relationship="Customer.ProspectContact" FromRole="Contact" ToRole="Prospect" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddrId" />
+          </Key>
+          <Property Name="AddrId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddrLine1" Type="String" Nullable="false" />
+          <Property Name="AddrLine2" Type="String" Nullable="false" />
+          <Property Name="AddrZip" Type="String" Nullable="false" />
+          <Property Name="AddrZip4" Type="String" Nullable="false" />
+          <Property Name="Country" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+          <NavigationProperty Name="Contact" Relationship="Customer.ContactAddress" FromRole="Address" ToRole="Contact" />
+          <NavigationProperty Name="Prospect" Relationship="Customer.ProspectAddress" FromRole="Address" ToRole="Prospect" />
+          <NavigationProperty Name="Customer" Relationship="Customer.CustomerAddress" FromRole="Address" ToRole="Customer" />
+        </EntityType>
+        <Association Name="ContactAddress">
+          <End Type="Customer.Contact" Role="Contact" Multiplicity="1" />
+          <End Type="Customer.Address" Role="Address" Multiplicity="*" />
+        </Association>
+        <Association Name="CustomerEmployee">
+          <End Type="Customer.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Customer.Employee" Role="Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="CustomerProspect">
+          <End Type="Customer.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Customer.Prospect" Role="Prospect" Multiplicity="*" />
+        </Association>
+        <Association Name="ProspectContact">
+          <End Type="Customer.Prospect" Role="Prospect" Multiplicity="1" />
+          <End Type="Customer.Contact" Role="Contact" Multiplicity="*" />
+        </Association>
+        <Association Name="ProspectTouch">
+          <End Type="Customer.Prospect" Role="Prospect" Multiplicity="1" />
+          <End Type="Customer.Touch" Role="Touch" Multiplicity="*" />
+        </Association>
+        <Association Name="EmployeeTouch">
+          <End Type="Customer.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Customer.Touch" Role="Touch" Multiplicity="*" />
+        </Association>
+        <Association Name="ProspectAddress">
+          <End Type="Customer.Prospect" Role="Prospect" Multiplicity="1" />
+          <End Type="Customer.Address" Role="Address" Multiplicity="*" />
+        </Association>
+        <Association Name="CustomerAddress">
+          <End Type="Customer.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Customer.Address" Role="Address" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="CredentialId" />
+          </Key>
+          <Property Name="CredentialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountEmail" Type="String" Nullable="false" />
+          <Property Name="AccountPassword" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Customer.CustomerCredentials" FromRole="Credentials" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Customer.EmployeeCredentials" FromRole="Credentials" ToRole="Employee" />
+        </EntityType>
+        <Association Name="CustomerCredentials">
+          <End Type="Customer.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Customer.Credentials" Role="Credentials" Multiplicity="1" />
+        </Association>
+        <Association Name="EmployeeCredentials">
+          <End Type="Customer.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Customer.Credentials" Role="Credentials" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CustomerStoreContainer" CdmEntityContainer="CustomerContainer">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(Customer.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(Customer.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+          <ScalarProperty Name="EmployeeDesignation" ColumnName="EmployeeDesignation" />
+          <ScalarProperty Name="EmployeeTerritory" ColumnName="EmployeeTerritory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prospects">
+      <EntityTypeMapping TypeName="IsTypeOf(Customer.Prospect)">
+        <MappingFragment StoreEntitySet="Prospects">
+          <ScalarProperty Name="ProspectId" ColumnName="ProspectId" />
+          <ScalarProperty Name="ProspectName" ColumnName="ProspectName" />
+          <ScalarProperty Name="ProspectSource" ColumnName="ProspectSource" />
+          <ScalarProperty Name="ProspectDateAdded" ColumnName="ProspectDateAdded" />
+          <ScalarProperty Name="ProspectAssignedTo" ColumnName="ProspectAssignedTo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Touches">
+      <EntityTypeMapping TypeName="IsTypeOf(Customer.Touch)">
+        <MappingFragment StoreEntitySet="Touches">
+          <ScalarProperty Name="TouchId" ColumnName="TouchId" />
+          <ScalarProperty Name="TouchDate" ColumnName="TouchDate" />
+          <ScalarProperty Name="TouchType" ColumnName="TouchType" />
+          <ScalarProperty Name="TouchNotes" ColumnName="TouchNotes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="IsTypeOf(Customer.Contact)">
+        <MappingFragment StoreEntitySet="Contacts">
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+          <ScalarProperty Name="ContactFirstName" ColumnName="ContactFirstName" />
+          <ScalarProperty Name="ContactLastName" ColumnName="ContactLastName" />
+          <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+          <ScalarProperty Name="ContactBusPhone" ColumnName="ContactBusPhone" />
+          <ScalarProperty Name="ContactExtension" ColumnName="ContactExtension" />
+          <ScalarProperty Name="ContactCellPhone" ColumnName="ContactCellPhone" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactDecisionMaker" ColumnName="ContactDecisionMaker" />
+          <ScalarProperty Name="ContactNotes" ColumnName="ContactNotes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="IsTypeOf(Customer.Address)">
+        <MappingFragment StoreEntitySet="Addresses">
+          <ScalarProperty Name="AddrId" ColumnName="AddrId" />
+          <ScalarProperty Name="AddrLine1" ColumnName="AddrLine1" />
+          <ScalarProperty Name="AddrLine2" ColumnName="AddrLine2" />
+          <ScalarProperty Name="AddrZip" ColumnName="AddrZip" />
+          <ScalarProperty Name="AddrZip4" ColumnName="AddrZip4" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Credentials">
+      <EntityTypeMapping TypeName="IsTypeOf(Customer.Credentials)">
+        <MappingFragment StoreEntitySet="Credentials">
+          <ScalarProperty Name="CredentialId" ColumnName="CredentialId" />
+          <ScalarProperty Name="AccountEmail" ColumnName="AccountEmail" />
+          <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ContactAddress" TypeName="Customer.ContactAddress" StoreEntitySet="Addresses">
+      <EndProperty Name="Contact">
+        <ScalarProperty Name="ContactId" ColumnName="Contact_ContactId" />
+      </EndProperty>
+      <EndProperty Name="Address">
+        <ScalarProperty Name="AddrId" ColumnName="AddrId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerEmployee" TypeName="Customer.CustomerEmployee" StoreEntitySet="Employees">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerId" ColumnName="Customer_CustomerId" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerProspect" TypeName="Customer.CustomerProspect" StoreEntitySet="Prospects">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerId" ColumnName="Customer_CustomerId" />
+      </EndProperty>
+      <EndProperty Name="Prospect">
+        <ScalarProperty Name="ProspectId" ColumnName="ProspectId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProspectContact" TypeName="Customer.ProspectContact" StoreEntitySet="Contacts">
+      <EndProperty Name="Prospect">
+        <ScalarProperty Name="ProspectId" ColumnName="Prospect_ProspectId" />
+      </EndProperty>
+      <EndProperty Name="Contact">
+        <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProspectTouch" TypeName="Customer.ProspectTouch" StoreEntitySet="Touches">
+      <EndProperty Name="Prospect">
+        <ScalarProperty Name="ProspectId" ColumnName="Prospect_ProspectId" />
+      </EndProperty>
+      <EndProperty Name="Touch">
+        <ScalarProperty Name="TouchId" ColumnName="TouchId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EmployeeTouch" TypeName="Customer.EmployeeTouch" StoreEntitySet="Touches">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeId" ColumnName="Employee_EmployeeId" />
+      </EndProperty>
+      <EndProperty Name="Touch">
+        <ScalarProperty Name="TouchId" ColumnName="TouchId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProspectAddress" TypeName="Customer.ProspectAddress" StoreEntitySet="Addresses">
+      <EndProperty Name="Prospect">
+        <ScalarProperty Name="ProspectId" ColumnName="Prospect_ProspectId" />
+      </EndProperty>
+      <EndProperty Name="Address">
+        <ScalarProperty Name="AddrId" ColumnName="AddrId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerAddress" TypeName="Customer.CustomerAddress" StoreEntitySet="Addresses">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerId" ColumnName="Customer_CustomerId" />
+      </EndProperty>
+      <EndProperty Name="Address">
+        <ScalarProperty Name="AddrId" ColumnName="AddrId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerCredentials" TypeName="Customer.CustomerCredentials" StoreEntitySet="Customers">
+      <EndProperty Name="Credentials">
+        <ScalarProperty Name="CredentialId" ColumnName="Credentials_CredentialId" />
+      </EndProperty>
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EmployeeCredentials" TypeName="Customer.EmployeeCredentials" StoreEntitySet="Employees">
+      <EndProperty Name="Credentials">
+        <ScalarProperty Name="CredentialId" ColumnName="Credentials_CredentialId" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
