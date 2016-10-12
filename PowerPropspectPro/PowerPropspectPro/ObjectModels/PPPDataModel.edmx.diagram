@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="Customer.Customer" Width="1.5" PointX="2.625" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Customer.Employee" Width="1.5" PointX="2.625" PointY="4.25" />
         <EntityTypeShape EntityType="Customer.Prospect" Width="1.5" PointX="5.625" PointY="1.25" />
-        <EntityTypeShape EntityType="Customer.Touch" Width="1.5" PointX="5.625" PointY="4.25" />
+        <EntityTypeShape EntityType="Customer.Touch" Width="1.5" PointX="5.625" PointY="4.75" />
         <EntityTypeShape EntityType="Customer.Contact" Width="1.5" PointX="7.875" PointY="1.25" />
         <EntityTypeShape EntityType="Customer.Address" Width="1.5" PointX="10.125" PointY="1.25" />
         <AssociationConnector Association="Customer.ContactAddress" />

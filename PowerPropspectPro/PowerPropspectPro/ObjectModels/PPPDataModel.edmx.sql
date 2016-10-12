@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/07/2016 23:46:47
--- Generated from EDMX file: C:\Users\Jason\documents\visual studio 2015\Projects\PowerPropspectPro\PowerPropspectPro\ObjectModels\PPPDataModel.edmx
+-- Date Created: 10/09/2016 22:23:15
+-- Generated from EDMX file: C:\Users\Jason\Source\Repos\Prospect\PowerPropspectPro\PowerPropspectPro\ObjectModels\PPPDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -105,6 +105,7 @@ CREATE TABLE [dbo].[Prospects] (
     [ProspectSource] nvarchar(max)  NOT NULL,
     [ProspectDateAdded] nvarchar(max)  NOT NULL,
     [ProspectAssignedTo] nvarchar(max)  NOT NULL,
+    [ProspectNumber] nvarchar(max)  NOT NULL,
     [Customer_CustomerId] int  NOT NULL
 );
 GO

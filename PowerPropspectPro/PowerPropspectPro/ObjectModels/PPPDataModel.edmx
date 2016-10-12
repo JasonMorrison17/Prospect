@@ -83,6 +83,7 @@
     <Property Name="ProspectSource" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ProspectDateAdded" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ProspectAssignedTo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProspectNumber" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Customer_CustomerId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Touches">
@@ -473,6 +474,7 @@
           <ScalarProperty Name="ProspectSource" ColumnName="ProspectSource" />
           <ScalarProperty Name="ProspectDateAdded" ColumnName="ProspectDateAdded" />
           <ScalarProperty Name="ProspectAssignedTo" ColumnName="ProspectAssignedTo" />
+          <ScalarProperty Name="ProspectNumber" ColumnName="ProspectNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
